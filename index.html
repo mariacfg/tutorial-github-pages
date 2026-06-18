@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva: Publicar en GitHub Pages</title>
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para iconos modernos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Personalizaciones adicionales para la paleta fucsia */
+        .fuchsia-gradient {
+            background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #f472b6;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen antialiased flex flex-col justify-between">
+
+    <!-- CABECERA -->
+    <header class="bg-white border-b border-fuchsia-100 shadow-sm sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <!-- Logotipo GitHub estilizado en fucsia -->
+                <div class="p-2 bg-fuchsia-50 rounded-xl text-fuchsia-600">
+                    <svg class="w-8 h-8" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-fuchsia-700 flex items-center gap-2">
+                        GitHub Pages <span class="text-xs bg-fuchsia-100 text-fuchsia-700 px-2 py-0.5 rounded-full font-semibold">Tutorial</span>
+                    </h1>
+                    <p class="text-xs text-slate-500">Guía interactiva de publicación rápida</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-500">Hecho para</span>
+                <span class="text-xs font-semibold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1.5">
+                    <i data-lucide="cpu" class="w-3.5 h-3.5 text-fuchsia-600"></i> IA Arena (Agente)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-5xl w-full mx-auto px-4 py-8 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- COLUMNA IZQUIERDA: Herramientas del Progreso e Info -->
+        <section class="lg:col-span-4 space-y-6">
+            <!-- Tarjeta de bienvenida y enfoque -->
+            <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-fuchsia-50 rounded-full translate-x-8 -translate-y-8 pointer-events-none"></div>
+                <h2 class="text-lg font-bold text-fuchsia-800 mb-2 flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-fuchsia-500"></i> ¡Listo para Publicar!
+                </h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Tu Agente de IA ya se ha encargado del código y las rutas. Ahora solo debes seguir estos pasos para subir tu web y tenerla online gratis.
+                </p>
+            </div>
+
+            <!-- Tarjeta de Progreso -->
+            <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm">
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center justify-between">
+                    <span>Progreso General</span>
+                    <span id="progress-percent" class="text-fuchsia-600 normal-case">0%</span>
+                </h3>
+                <div class="w-full bg-slate-100 rounded-full h-2.5 mb-6 overflow-hidden">
+                    <div id="progress-bar" class="fuchsia-gradient h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                
+                <!-- Lista de verificación interactiva -->
+                <div class="space-y-3">
+                    <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                        <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
+                        <span class="text-sm text-slate-600">Crear repositorio público</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                        <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
+                        <span class="text-sm text-slate-600">Subir tus archivos locales</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                        <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
+                        <span class="text-sm text-slate-600">Activar rama en GitHub Pages</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                        <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
+                        <span class="text-sm text-slate-600">¡Visitar la URL publicada!</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Requisitos -->
+            <div class="bg-fuchsia-50/50 rounded-2xl p-6 border border-fuchsia-100">
+                <h3 class="text-sm font-bold text-fuchsia-800 flex items-center gap-2 mb-3">
+                    <i data-lucide="check-circle-2" class="w-4 h-4"></i> Requisitos Previos
+                </h3>
+                <ul class="text-xs text-slate-600 space-y-2.5">
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-fuchsia-500 rounded-full"></span> Cuenta activa en GitHub.
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-fuchsia-500 rounded-full"></span> Archivos de la web preparados.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- COLUMNA DERECHA: Métodos del Tutorial -->
+        <section class="lg:col-span-8 space-y-6">
+            
+            <!-- Selector de Métodos (Pestañas) -->
+            <div class="bg-slate-200/60 p-1.5 rounded-xl flex gap-2">
+                <button onclick="switchTab('web')" id="tab-web" class="flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-white text-fuchsia-700 shadow-sm">
+                    <i data-lucide="globe" class="w-4 h-4"></i> Método 1: Interfaz Web
+                </button>
+                <button onclick="switchTab('terminal')" id="tab-terminal" class="flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800">
+                    <i data-lucide="terminal" class="w-4 h-4"></i> Método 2: Terminal / Git
+                </button>
+            </div>
+
+            <!-- NOTIFICACIÓN DE COPIADO -->
+            <div id="toast" class="hidden fixed bottom-5 right-5 bg-slate-950 text-white text-xs px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 transition-all duration-300 transform translate-y-2 opacity-0">
+                <i data-lucide="check" class="w-4 h-4 text-fuchsia-400"></i>
+                <span>¡Copiado al portapapeles!</span>
+            </div>
+
+            <!-- CONTENIDO: MÉTODO 1 (WEB) -->
+            <div id="content-web" class="space-y-6">
+                <!-- Paso 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 1</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4 flex items-center gap-2">
+                        Crear un Nuevo Repositorio en GitHub
+                    </h3>
+                    <ol class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">1</span>
+                            <span>Inicia sesión en tu cuenta en <a href="https://github.com" target="_blank" class="text-fuchsia-600 hover:underline font-medium">github.com <i data-lucide="external-link" class="inline w-3 h-3"></i></a>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">2</span>
+                            <span>Haz clic en el botón de suma <b class="text-fuchsia-700 font-bold bg-fuchsia-50 px-1.5 py-0.5 rounded">+</b> arriba a la derecha y selecciona <b>New repository</b>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">3</span>
+                            <span>Escribe un nombre elegante para tu proyecto (ej: <code>mi-sitio-web</code>).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">4</span>
+                            <span>Asegúrate de marcarlo como <b>Public</b> (es indispensable para usar la opción gratuita).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">5</span>
+                            <span>Deja todas las demás opciones desmarcadas y haz clic en <b>Create repository</b>.</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 2</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4">Subir los archivos del proyecto</h3>
+                    <ol class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">1</span>
+                            <span>En la página inicial de tu nuevo repositorio, busca y pulsa el enlace que dice <b>"uploading an existing file"</b>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">2</span>
+                            <span>Selecciona y arrastra todos los archivos de tu web dentro del área gris de la pantalla.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">3</span>
+                            <span>Abajo del todo, escribe un título descriptivo en el campo Commit (ej. <code>Subida inicial</code>).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">4</span>
+                            <span>Presiona el botón verde <b>Commit changes</b> y espera a que se procese.</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 3</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4">Activar el Despliegue de Pages</h3>
+                    <ol class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">1</span>
+                            <span>Ve a la pestaña <b>Settings</b> (Configuración) en el menú superior del repositorio.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">2</span>
+                            <span>En el panel izquierdo busca el menú de <b>Pages</b>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">3</span>
+                            <span>Bajo la sección *Build and deployment*, cambia la rama (Branch) de <i>None</i> a <b>main</b> (o master).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">4</span>
+                            <span>Guarda los cambios haciendo clic en <b>Save</b>.</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- CONTENIDO: MÉTODO 2 (TERMINAL) -->
+            <div id="content-terminal" class="space-y-6 hidden">
+                <!-- Paso 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 1</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4">Inicializar tu repositorio local</h3>
+                    <p class="text-sm text-slate-600 mb-4">Abre tu terminal dentro de la carpeta del proyecto y ejecuta estos comandos secuenciales:</p>
+                    
+                    <div class="relative bg-slate-900 rounded-xl p-4 text-slate-200 text-xs font-mono overflow-x-auto custom-scrollbar">
+                        <button onclick="copyToClipboard('code-init')" class="absolute top-3 right-3 p-1.5 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors" title="Copiar código">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                        <pre id="code-init">git init
+git checkout -b main
+git add .
+git commit -m "Commit inicial"</pre>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 2</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4">Vincular con el servidor y subir</h3>
+                    <p class="text-sm text-slate-600 mb-4">Crea el repositorio vacío en la web de GitHub, copia su URL HTTPS y pégala en los siguientes comandos:</p>
+                    
+                    <div class="relative bg-slate-900 rounded-xl p-4 text-slate-200 text-xs font-mono overflow-x-auto custom-scrollbar">
+                        <button onclick="copyToClipboard('code-remote')" class="absolute top-3 right-3 p-1.5 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors" title="Copiar código">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                        <pre id="code-remote"># Añade la dirección de tu repo de GitHub
+git remote add origin https://github.com/tu-usuario/nombre-repo.git
+
+# Empuja los archivos hacia la nube
+git push -u origin main</pre>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 3</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4">Actualizaciones automáticas futuras</h3>
+                    <p class="text-sm text-slate-600 mb-4">Para realizar nuevas actualizaciones del proyecto, solo ejecuta en consola:</p>
+                    
+                    <div class="relative bg-slate-900 rounded-xl p-4 text-slate-200 text-xs font-mono overflow-x-auto custom-scrollbar">
+                        <button onclick="copyToClipboard('code-update')" class="absolute top-3 right-3 p-1.5 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors" title="Copiar código">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                        <pre id="code-update">git add .
+git commit -m "Actualización de contenido"
+git push origin main</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTADO Y VISUALIZACIÓN -->
+            <div class="bg-gradient-to-r from-fuchsia-500 to-pink-600 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> ¿Dónde estará visible tu página?
+                    </h3>
+                    <p class="text-sm text-fuchsia-50/90 mb-4">
+                        Cuando el despliegue finalice, podrás acceder a tu sitio usando el enlace de tu cuenta:
+                    </p>
+                    <div class="bg-black/20 p-3 rounded-xl font-mono text-sm inline-flex items-center gap-2 select-all w-full justify-between">
+                        <span id="output-url">https://tu-usuario.github.io/tu-repositorio/</span>
+                        <i data-lucide="link" class="w-4 h-4 text-fuchsia-200"></i>
+                    </div>
+                    <p class="text-xs text-fuchsia-100 mt-3 flex items-center gap-1">
+                        <i data-lucide="clock" class="w-3.5 h-3.5"></i> Nota de despliegue: El proceso inicial toma habitualmente entre 1 y 5 minutos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- POPUP DE CELEBRACIÓN DE PASOS COMPLETADOS -->
+            <div id="celebration-modal" class="hidden bg-emerald-50 border border-emerald-200 p-5 rounded-2xl flex items-center gap-4 shadow-sm animate-pulse">
+                <div class="p-3 bg-emerald-500 text-white rounded-full">
+                    <i data-lucide="party-popper" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h4 class="text-emerald-900 font-bold text-sm">¡Todos los pasos listos!</h4>
+                    <p class="text-xs text-emerald-700">Tu proyecto se está desplegando correctamente en la nube.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-white border-t border-slate-100 mt-12 py-6 text-center text-xs text-slate-400">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p>© 2026 Guía de GitHub Pages para Desarrolladores</p>
+            <div class="flex gap-4">
+                <a href="https://github.com" target="_blank" class="hover:text-fuchsia-600 transition-colors">GitHub oficial</a>
+                <span class="text-slate-200">|</span>
+                <span class="text-fuchsia-500 font-semibold">Fondo Claro & Fuchsia Theme</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGICA INTERACTIVA (JS) -->
+    <script>
+        // Inicializar los iconos Lucide
+        lucide.createIcons();
+
+        // Control de Pestañas (Tabs)
+        function switchTab(tab) {
+            const btnWeb = document.getElementById('tab-web');
+            const btnTerminal = document.getElementById('tab-terminal');
+            const contentWeb = document.getElementById('content-web');
+            const contentTerminal = document.getElementById('content-terminal');
+
+            if (tab === 'web') {
+                btnWeb.className = "flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-white text-fuchsia-700 shadow-sm";
+                btnTerminal.className = "flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800";
+                contentWeb.classList.remove('hidden');
+                contentTerminal.classList.add('hidden');
+            } else {
+                btnTerminal.className = "flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 bg-white text-fuchsia-700 shadow-sm";
+                btnWeb.className = "flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800";
+                contentTerminal.classList.remove('hidden');
+                contentWeb.classList.add('hidden');
+            }
+        }
+
+        // Copiar comandos de código al portapapeles de manera segura para iFrames
+        function copyToClipboard(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            
+            // Creación de un input temporal para realizar la copia compatible
+            const tempInput = document.createElement("textarea");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast();
+        }
+
+        // Mostrar notificación flotante de copiado
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+                toast.classList.add('opacity-100', 'translate-y-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 2000);
+        }
+
+        // Progreso de pasos completados (Checklist)
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.todo-item');
+            const total = checkboxes.length;
+            let completed = 0;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    completed++;
+                }
+            });
+
+            const percent = Math.round((completed / total) * 100);
+            
+            // Actualizar interfaz visual
+            document.getElementById('progress-percent').innerText = `${percent}%`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+
+            // Mostrar celebración si se completan todos los pasos
+            const celebration = document.getElementById('celebration-modal');
+            if (percent === 100) {
+                celebration.classList.remove('hidden');
+            } else {
+                celebration.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
