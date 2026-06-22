@@ -74,6 +74,10 @@
                 <div class="space-y-3">
                     <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
                         <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
+                        <span class="text-sm text-slate-600">Crear la web con Arena AI (Modo Agente)</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                        <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
                         <span class="text-sm text-slate-600">Crear repositorio con el botón New</span>
                     </label>
                     <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
@@ -116,6 +120,116 @@
 
             <!-- CONTENIDO DE LOS PASOS (METODO WEB) -->
             <div class="space-y-6">
+                <!-- Paso 0: NUEVO -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 0</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4 flex items-center gap-2">
+                        <i data-lucide="bot" class="w-5 h-5 text-fuchsia-600"></i> Crear tu web con Arena AI (Modo Agente)
+                    </h3>
+                    <ol class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">1</span>
+                            <span>Entra en <a href="https://arena.ai" target="_blank" class="text-fuchsia-600 hover:underline font-medium">arena.ai</a> e inicia sesión.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">2</span>
+                            <span>Activa el <b>Modo Agente</b> en la interfaz principal.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">3</span>
+                            <span>Describe tu proyecto web (por ejemplo: “Crea una landing page moderna para mi negocio de café”).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">4</span>
+                            <span>El Agente generará automáticamente el código HTML, CSS y JS de tu sitio.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">5</span>
+                            <span>Cuando estés satisfecho, descarga los archivos o copia el código del archivo <code>index.html</code>.</span>
+                        </li>
+                    </ol>
+
+                    <!-- Ejemplos de prompts -->
+                    <div class="mt-5 pt-4 border-t border-fuchsia-100">
+                        <p class="text-xs font-semibold text-fuchsia-700 mb-3 flex items-center gap-1.5">
+                            <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> 
+                            Ejemplos de prompts para Arena AI
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Crea una landing page moderna para una cafetería artesanal con colores cálidos, formulario de reserva y menú destacado."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Genera un portafolio profesional para un diseñador gráfico con galería de proyectos y sección de contacto."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Crea una página de producto para una app de productividad con precio, características y botón de prueba gratis."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Haz una web para un restaurante con carta digital, sistema de reservas y ubicación en el mapa."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Crea una página de inicio para una agencia de marketing digital con testimonios, servicios y formulario de contacto."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Genera una web para un gimnasio con planes de membresía, horarios de clases y botón de inscripción."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Crea una landing page para un curso online de fotografía con precio, beneficios y formulario de inscripción."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Haz una web personal para un desarrollador con proyectos, habilidades y enlaces a GitHub y LinkedIn."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Crea una web para una inmobiliaria con filtros de propiedades, galería de fotos y formulario de contacto."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Genera una página de eventos con calendario, lista de ponentes y botón de inscripción."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Crea una web para un estudio de tatuajes con galería de trabajos, precios y formulario de cita."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Haz una landing page para un SaaS de facturación con planes de precio y demo interactiva."
+                            </div>
+                            <div class="bg-fuchsia-50/70 p-3 rounded-xl border border-fuchsia-100">
+                                <span class="font-medium text-fuchsia-800">•</span> 
+                                "Genera una web para una ONG con misión, proyectos y formulario de donación."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consejos para páginas atractivas y funcionales -->
+                    <div class="mt-5 pt-4 border-t border-fuchsia-100">
+                        <p class="text-xs font-semibold text-fuchsia-700 mb-3 flex items-center gap-1.5">
+                            <i data-lucide="star" class="w-3.5 h-3.5"></i> 
+                            Consejos para crear páginas web atractivas y funcionales
+                        </p>
+                        <div class="bg-white border border-fuchsia-100 rounded-xl p-4 text-xs text-slate-600 space-y-2">
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Responsive:</strong> Usa Tailwind o media queries para que se vea bien en móvil, tablet y escritorio.</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Imágenes optimizadas:</strong> Usa formatos WebP y comprime las imágenes (GitHub Pages es estático).</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Colores y tipografía:</strong> Mantén una paleta coherente (máximo 3-4 colores) y fuentes legibles.</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Navegación clara:</strong> Añade un menú simple con anclas o enlaces a secciones.</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Velocidad:</strong> Evita scripts pesados. Usa CDNs como Tailwind (ya incluido en este tutorial).</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Meta tags:</strong> Incluye título, descripción y favicon para mejor SEO y apariencia.</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>GitHub Pages friendly:</strong> Todo debe ser estático (HTML + CSS + JS). No uses PHP, Node o bases de datos.</span></div>
+                            <div class="flex gap-2"><span class="font-bold text-fuchsia-700">✓</span> <span><strong>Pruebas:</strong> Abre la web en varios navegadores y dispositivos antes de subir.</span></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Paso 1 -->
                 <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
                     <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 1</span>
@@ -301,5 +415,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0fc4f509df386a3',t:'MTc4MjE0MjM4OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
