@@ -88,6 +88,10 @@
                         <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
                         <span class="text-sm text-slate-600">¡Acceder a la URL de tu web!</span>
                     </label>
+                    <label class="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                        <input type="checkbox" onchange="updateProgress()" class="todo-item mt-1 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500 h-4 w-4">
+                        <span class="text-sm text-slate-600">Actualizar web y subir cambios</span>
+                    </label>
                 </div>
             </div>
 
@@ -189,6 +193,34 @@
                         </li>
                     </ol>
                 </div>
+
+                <!-- Paso 4: NUEVO -->
+                <div class="bg-white rounded-2xl p-6 border border-fuchsia-100 shadow-sm relative">
+                    <span class="absolute -top-3 left-6 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 text-xs font-bold rounded-full">Paso 4</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-2 mb-4">Actualizar tu web y subir cambios</h3>
+                    <ol class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">1</span>
+                            <span>Accede a tu repositorio en GitHub y haz clic en el botón verde <b>Add file</b> → <b>Upload files</b>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">2</span>
+                            <span>Arrastra y suelta los archivos que hayas modificado (o las nuevas versiones).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">3</span>
+                            <span>En la parte inferior, escribe un mensaje descriptivo de los cambios (ej: <code>Actualización del diseño</code>).</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">4</span>
+                            <span>Haz clic en <b>Commit changes</b>. Los cambios se subirán automáticamente a la rama <b>main</b>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center text-xs font-bold">5</span>
+                            <span>GitHub Pages se actualizará automáticamente en 1-5 minutos. ¡Tu web mostrará los cambios!</span>
+                        </li>
+                    </ol>
+                </div>
             </div>
 
             <!-- RESULTADO Y VISUALIZACIÓN -->
@@ -269,5 +301,5 @@
             }
         }
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0fc4f509df386a3',t:'MTc4MjE0MjM4OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
